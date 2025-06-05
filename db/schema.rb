@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2025_06_05_182842) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -22,7 +19,7 @@ ActiveRecord::Schema.define(version: 2025_06_05_182842) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.bigint "user_id"
+    t.integer "user_id"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,12 +30,10 @@ ActiveRecord::Schema.define(version: 2025_06_05_182842) do
     t.string "display_name"
     t.string "email"
     t.string "username"
-    t.bigint "company_id"
+    t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_users_on_company_id"
   end
 
-  add_foreign_key "tweets", "users", on_delete: :cascade
-  add_foreign_key "users", "companies", on_delete: :cascade
 end
